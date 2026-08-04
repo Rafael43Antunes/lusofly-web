@@ -1,0 +1,35 @@
+from django.db import models
+
+# Create your models here.
+class Aeronave(models.Model):
+    #info card
+    nome = models.CharField(max_length=100, help_text="Ex: Cessna 152")
+    descricao_curta = models.CharField(max_length=150, help_text="Texto curto para aparecer no Card da frota")
+    imagem_principal = models.ImageField(upload_to='frota/principais/', help_text="Foto que aparece no Card")
+
+    # Info para a Página de Detalhe
+    historia = models.TextField(help_text="História e descrição longa (permite formatação)")
+    motor = models.CharField(max_length=150, help_text="Ex: Lycoming O-235-L2C")
+    capacidade = models.IntegerField(help_text="Número de lugares")
+    velocidade_cruzeiro = models.CharField(max_length=50, help_text="Ex: 107 nós")
+    autonomia = models.CharField(max_length=50, help_text="Ex: 4.5 horas")
+    
+    ativo = models.BooleanField(default=True, help_text="Avião está ao serviço?")
+
+    class Meta:
+        verbose_name = "Aeronave"
+        verbose_name_plural = "Frota"
+
+    def __str__(self):
+        return self.nome
+
+
+class ImagemAeronave(models.Model):
+    # A magia acontece aqui: o related_name='galeria' vai facilitar muito a construção da API para o Next.js
+    aeronave = models.ForeignKey(Aeronave, related_name='galeria', on_delete=models.CASCADE)
+    imagem = models.ImageField(upload_to='frota/galeria/')
+    legenda = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Imagem da Galeria"
+        verbose_name_plural = "Galeria de Imagens"

@@ -9,3 +9,7 @@ class AeronaveListAPIView(generics.ListAPIView):
     # O filtro garante que o Next.js só recebe aviões que estejam marcados como "ativos"
     queryset = Aeronave.objects.filter(ativo=True)
     serializer_class = AeronaveSerializer
+
+class AeronaveDetailAPIView(generics.RetrieveAPIView):
+    queryset = Aeronave.objects.filter(ativo=True)
+    serializer_class = AeronaveSerializer

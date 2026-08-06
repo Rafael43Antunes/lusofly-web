@@ -1,13 +1,13 @@
-
 import Link from "next/link";
 import { Aeronave } from "../types";
 import FrotaInteractive from "./FrotaInteractive";
 
 // Função para ir buscar os dados à API do teu Django
 async function getFrota(): Promise<Aeronave[]> {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   // O fetch vai ao teu backend. 
   // O cache: 'no-store' garante que se alterares algo no Django Admin, o Next.js atualiza instantaneamente
-  const res = await fetch('http://127.0.0.1:8000/api/frota/', { cache: 'no-store' });
+  const res = await fetch(`${apiUrl}/api/frota/`, { cache: 'no-store' });
   
   if (!res.ok) {
     throw new Error('Falha ao carregar a frota a partir do Django');

@@ -46,10 +46,12 @@ export default function FrotaInteractive({ frota }: { frota: Aeronave[] }) {
     return () => clearInterval(temporizador);
   }, [aviaoAtivo, imagens.length]); // Este efeito "acorda" sempre que o avião ativo muda
 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
   // Injeta o localhost:8000 antes do /media/
   const historiaCorrigida = aviaoAtivo?.historia.replace(
     /src="\/media\//g,
-    'src="http://127.0.0.1:8000/media/'
+    `src="${apiUrl}/media/`
   );
 
   return (

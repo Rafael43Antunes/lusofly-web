@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 // O SEO do teu site!
 export const metadata: Metadata = {
-  title: "Lusofly Academy | Escola de Aviação de Elite",
+  title: "Lusofly Academy",
   description: "Formamos os comandantes do amanhã com tecnologia de ponta, segurança rigorosa e uma frota moderna.",
 };
 
@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt" className="scroll-smooth">
+    <html lang="pt" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${inter.className} bg-slate-50 text-slate-900 overflow-x-hidden`}>
         
         <Navigation />

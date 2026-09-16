@@ -16,7 +16,20 @@ class Aeronave(models.Model):
     
     ativo = models.BooleanField(default=True, help_text="Avião está ao serviço?")
 
+    link_externo = models.URLField(
+        max_length=500, 
+        blank=True, 
+        null=True, 
+        help_text="Link para o site oficial do fabricante"
+    )
+
+    ordem = models.IntegerField(
+        default=0, 
+        help_text="Ordem de apresentação (ex: 1 para aparecer primeiro)"
+    )
+
     class Meta:
+        ordering = ["ordem"]
         verbose_name = "Aeronave"
         verbose_name_plural = "Frota"
 

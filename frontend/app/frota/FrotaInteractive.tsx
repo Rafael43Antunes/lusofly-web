@@ -74,6 +74,29 @@ export default function FrotaInteractive({ frota }: { frota: Aeronave[] }) {
                 <span className="bg-slate-100 px-3 py-1 rounded-full">{aviao.velocidade_cruzeiro}</span>
                 <span>{aviao.capacidade} Lugares</span>
               </div>
+              {/* Botão de Link Externo*/}
+              <div className="mt-auto pt-4 border-t border-slate-100">
+                {aviao.link_externo ? (
+                  <a 
+                    href={aviao.link_externo} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()} 
+                    className="w-full flex items-center justify-center gap-2 bg-slate-50 hover:bg-blue-50 text-blue-600 text-sm font-bold py-3 px-4 rounded-xl transition-colors border border-slate-100 hover:border-blue-100"
+                  >
+                    Site Oficial da Aeronave
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
+                ) : (
+                  <div className="w-full text-center text-sm text-slate-400 py-3 font-semibold">
+                    Clique no cartão para ver detalhes
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         ))}
@@ -142,6 +165,25 @@ export default function FrotaInteractive({ frota }: { frota: Aeronave[] }) {
                     <li><strong className="text-slate-900">Velocidade:</strong> {aviaoAtivo.velocidade_cruzeiro}</li>
                     <li><strong className="text-slate-900">Autonomia:</strong> {aviaoAtivo.autonomia}</li>
                   </ul>
+
+                  {aviaoAtivo.link_externo && (
+                    <div className="mt-auto pt-6 border-t border-slate-200">
+                      <a 
+                        href={(aviaoAtivo as any).link_externo} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-4 px-4 rounded-xl transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                      >
+                        Ver no Site Oficial
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                          <polyline points="15 3 21 3 21 9"></polyline>
+                          <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                      </a>
+                    </div>
+                  )}
+                  
                 </div>
               </div>
             </div>

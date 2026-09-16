@@ -16,4 +16,5 @@ export type Aeronave = {
   autonomia: string;
   ativo: boolean;
   galeria: ImagemGaleria[];
+  link_externo?: string;
 };

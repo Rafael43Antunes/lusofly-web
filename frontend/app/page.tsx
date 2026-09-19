@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Aeronave } from "./types";
 import HeroSlider from "./componentes/HeroSlider";
 import FrotaOverview from "./componentes/FrotaOverview";
+import CoursesOverview from "./componentes/CoursesOverview"
 
 export default async function Home() {
   return (
@@ -12,6 +13,9 @@ export default async function Home() {
 
       {/* 2. SECÇÃO DE RESUMO DA FROTA */}
       <FrotaOverview />
+
+      {/* Cursos */}
+      <CoursesOverview/>
 
       {/* 3. FOOTER PROFISSIONAL E SÚBTIL */}
       <footer className="bg-slate-950 text-slate-500 py-12 text-center text-sm border-t border-slate-800">

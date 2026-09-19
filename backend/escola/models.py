@@ -46,3 +46,40 @@ class ImagemAeronave(models.Model):
     class Meta:
         verbose_name = "Imagem da Galeria"
         verbose_name_plural = "Galeria de Imagens"
+
+
+class Curso(models.Model):
+    titulo = models.CharField(max_length=100, help_text="Ex: ATPL")
+    slug = models.SlugField(max_length=120, unique=True, blank=True, null=True)
+    imagem_destaque = models.ImageField(upload_to='cursos/', blank=True, null=True)
+
+    horas_totais = models.CharField(max_length=50, help_text="Ex: 30 Hrs")
+    descricao_curta = models.TextField(help_text="Resumo que aparece no topo da página de cursos")
+
+    descricao_completa = models.TextField(blank=True, null=True, help_text="Texto detalhado da página do curso")
+    saidas_profissionais = models.TextField(blank=True, null=True, help_text="O que o aluno pode fazer após o curso")
+
+    ordem = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['ordem']
+        verbose_name = "Curso"
+        verbose_name_plural = "Cursos"
+
+    def __str__(self):
+        return self.titulo
+
+class EtapaCurso(models.Model):
+    curso = models.ForeignKey(Curso, related_name='etapas', on_delete=models.CASCADE)
+    numero_etapa = models.IntegerField(help_text="1, 2, 3... para ordenar a timeline")
+    titulo_etapa = models.CharField(max_length=150, help_text="Ex: Fase 1 - Ground School")
+    descricao = models.TextField(help_text="O que o aluno vai fazer nesta fase")
+    horas_associadas = models.CharField(max_length=50, blank=True, null=True, help_text="Ex: 920H Teoria")
+
+    class Meta:
+        ordering = ['numero_etapa']
+        verbose_name = "Etapa do Curso"
+        verbose_name_plural = "Etapas do Curso"
+
+    def __str__(self):
+        return f"{self.curso.titulo} - Etapa {self.numero_etapa}"

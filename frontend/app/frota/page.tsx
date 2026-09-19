@@ -20,7 +20,7 @@ export default async function FrotaPage() {
   const frota = await getFrota();
 
   return (
-    <main className="min-h-screen bg-slate-50 p-10">
+    <main className="min-h-screen bg-slate-50 p-10 pt-32 pb-16 px-4">
       <h1 className="text-5xl font-extrabold text-center text-slate-800 mb-12 tracking-tight">
         A Nossa Frota
       </h1>

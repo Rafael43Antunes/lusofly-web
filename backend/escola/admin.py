@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from .models import Aeronave, ImagemAeronave
+from .models import Curso, EtapaCurso
 
 # Register your models here.
 
@@ -16,3 +17,12 @@ class AeronaveAdmin(SummernoteModelAdmin):
     list_display = ('nome', 'capacidade', 'ativo')
 
 admin.site.register(Aeronave, AeronaveAdmin)
+
+class EtapaCursoInline(admin.StackedInline):
+    model = EtapaCurso
+    extra = 1
+
+@admin.register(Curso)
+class CursoAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'horas_totais', 'ordem')
+    inlines = [EtapaCursoInline]

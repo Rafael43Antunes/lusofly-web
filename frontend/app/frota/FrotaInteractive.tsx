@@ -62,12 +62,12 @@ export default function FrotaInteractive({ frota }: { frota: Aeronave[] }) {
           <div
             key={aviao.id}
             onClick={() => abrirModal(aviao)}
-            className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 block cursor-pointer"
+            className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col cursor-pointer"
           >
-            <div className="h-64 w-full relative bg-slate-200">
+            <div className="h-48 md:h-52 w-full relative bg-slate-200">
               <img src={aviao.imagem_principal} alt={aviao.nome} className="w-full h-full object-cover" />
             </div>
-            <div className="p-6">
+            <div className="p-5 flex flex-col flex-grow">
               <h2 className="text-2xl font-bold text-slate-900">{aviao.nome}</h2>
               <p className="text-slate-600 mt-3 leading-relaxed">{aviao.descricao_curta}</p>
               <div className="mt-6 pt-4 border-t border-slate-100 flex justify-between items-center text-sm font-semibold text-slate-500">

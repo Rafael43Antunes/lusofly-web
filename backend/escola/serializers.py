@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Aeronave, ImagemAeronave
-from .models import Curso, EtapaCurso
+from .models import Curso, EtapaCurso, Testemunho
 
 # Serializer para as imagens da galeria
 class ImagemAeronaveSerializer(serializers.ModelSerializer):
@@ -22,9 +22,16 @@ class EtapaCursoSerializer(serializers.ModelSerializer):
         model = EtapaCurso
         fields = '__all__'
 
+class TestemunhoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Testemunho
+        fields = '__all__'
+
 class CursoSerializer(serializers.ModelSerializer):
     etapas = EtapaCursoSerializer(many=True, read_only=True)
+    testemunhos = TestemunhoSerializer(many=True, read_only=True)
 
     class Meta:
         model = Curso
         fields = '__all__'
+

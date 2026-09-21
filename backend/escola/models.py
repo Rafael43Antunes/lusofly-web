@@ -83,3 +83,20 @@ class EtapaCurso(models.Model):
 
     def __str__(self):
         return f"{self.curso.titulo} - Etapa {self.numero_etapa}"
+
+
+class Testemunho(models.Model):
+    curso = models.ForeignKey(Curso, related_name='testemunhos', on_delete=models.CASCADE, help_text="A que curso pertence este testemunho?")
+    nome = models.CharField(max_length=100)
+    cargo = models.CharField(max_length=100, help_text="Ex: First Officer - Avião Comercial")
+    texto = models.TextField()
+    ativo = models.BooleanField(default=True, help_text="Desmarca para ocultar este testemunho temporariamente")
+    ordem = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['ordem']
+        verbose_name = "Testemunho"
+        verbose_name_plural = "Testemunhos"
+
+    def __str__(self):
+        return f"{self.nome} ({self.curso.titulo})"

@@ -14,7 +14,7 @@ export default function AnimatedTimeline({ etapas }: { etapas: EtapaCurso[] }) {
       <motion.div 
         initial={{ height: 0 }}
         whileInView={{ height: '100%' }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: false, margin: "-100px" }}
         transition={{ duration: 1.5, ease: "easeOut" }}
         className="absolute left-6 md:left-1/2 top-0 w-1 bg-slate-800 -translate-x-1/2 rounded-full overflow-hidden origin-top"
       >
@@ -33,7 +33,7 @@ export default function AnimatedTimeline({ etapas }: { etapas: EtapaCurso[] }) {
             <motion.div 
               initial={{ scale: 0, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: false, margin: "-50px" }}
               transition={{ delay: 0.2, duration: 0.4, type: "spring" }}
               className="w-14 h-14 absolute left-6 md:left-1/2 -translate-x-1/2 rounded-full bg-slate-900 border-4 border-blue-600 flex items-center justify-center z-10 shadow-lg shadow-blue-900/50"
             >
@@ -44,7 +44,7 @@ export default function AnimatedTimeline({ etapas }: { etapas: EtapaCurso[] }) {
             <motion.div 
               initial={{ opacity: 0, x: xOffset }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, margin: "-100px" }}
               transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
               className={`w-[calc(100%-5rem)] ml-auto md:w-[calc(50%-4rem)] md:ml-0 bg-slate-800/80 backdrop-blur-sm hover:bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition-colors shadow-xl ${isEven ? 'md:mr-auto md:ml-0' : 'md:ml-auto md:mr-0'}`}
             >

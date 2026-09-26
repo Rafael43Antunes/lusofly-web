@@ -28,11 +28,13 @@ cd backend
 .\venv\Scripts\Activate.ps1
 python manage.py migrate
 python manage.py runserver
-
+```
 ### 2. Iniciar o Frontend (Next.js)
+```powershell
 cd frontend
 npm install
 npm run dev
+```
 
 ## 👨‍💻 Autor
 

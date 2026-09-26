@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from .models import Aeronave, ImagemAeronave
-from .models import Curso, EtapaCurso, Testemunho
+from .models import Curso, EtapaCurso, Testemunho, Carreira, Recrutador, Candidatura, TemplateEmail
 
 # Register your models here.
 
@@ -28,3 +28,9 @@ class CursoAdmin(admin.ModelAdmin):
     inlines = [EtapaCursoInline]
 
 admin.site.register(Testemunho)
+
+admin.site.register(Carreira)
+
+admin.site.register(Recrutador)
+admin.site.register(Candidatura)
+admin.site.register(TemplateEmail)

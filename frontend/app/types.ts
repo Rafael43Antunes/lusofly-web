@@ -39,6 +39,7 @@ export type Curso{
   ordem: number;
   etapas: EtapaCurso[];
   testemunhos?: Testemunho[];
+  carreiras?: Carreira[];
 }
 
 export interface Testemunho {
@@ -47,4 +48,11 @@ export interface Testemunho {
   cargo: string;
   texto: string;
   ativo: boolean;
+}
+
+export interface Carreira {
+  id: number;
+  icone: string;
+  titulo: string;
+  descricao: string;
 }

@@ -100,3 +100,65 @@ class Testemunho(models.Model):
 
     def __str__(self):
         return f"{self.nome} ({self.curso.titulo})"
+
+class Carreira(models.Model):
+    curso = models.ForeignKey(Curso, related_name='carreiras', on_delete=models.CASCADE)
+    icone = models.CharField(max_length=50, help_text="Exemplo: ✈️, 🍸, 📦")
+    titulo = models.CharField(max_length=100)
+    descricao = models.TextField()
+    ordem = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['ordem']
+        verbose_name = "Carreira / Saída Profissional"
+        verbose_name_plural = "Carreiras / Saídas Profissionais"
+
+    def __str__(self):
+        return f"{self.titulo} ({self.curso.titulo})"
+
+
+class Recrutador(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    ativo = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = "Recrutador (Email)"
+        verbose_name_plural = "Recrutadores (Emails)"
+
+    def __str__(self):
+        return f"{self.nome} ({self.email})"
+
+class Candidatura(models.Model):
+    nome = models.CharField(max_length=150)
+    email = models.EmailField()
+    telefone = models.CharField(max_length=20)
+    curso_interesse = models.ForeignKey(Curso, on_delete=models.SET_NULL, null=True, blank=True)
+    mensagem = models.TextField(blank=True, null=True)
+    data_submissao = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-data_submissao']
+        verbose_name = "Candidatura"
+        verbose_name_plural = "Candidaturas"
+
+    def __str__(self):
+        return f"{self.nome} - {self.curso_interesse}"
+
+class TemplateEmail(models.Model):
+    assunto = models.CharField(
+        max_length=200, 
+        default="Nova Candidatura: {nome}",
+        help_text="Usa {nome} e {curso} para personalizar o assunto."
+    )
+    corpo_mensagem = models.TextField(
+        default="Temos um novo candidato!\n\nNome: {nome}\nEmail: {email}\nTelefone: {telefone}\nCurso: {curso}\n\nMensagem do candidato:\n{mensagem}",
+        help_text="Tags disponíveis: {nome}, {email}, {telefone}, {curso}, {mensagem}. Escreve o texto como preferires."
+    )
+
+    class Meta:
+        verbose_name = "Template de Email"
+        verbose_name_plural = "Template de Email"
+
+    def __str__(self):
+        return "Configuração do Email de Candidatura"

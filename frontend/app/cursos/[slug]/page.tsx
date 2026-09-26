@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Curso } from "../../../types";
 import AnimatedTimeline from "../../componentes/AnimatedTimeline";
+import AnimatedCareers from "@/app/componentes/AnimatedCareers";
 
 async function getCursoBySlug(slug: string): Promise<Curso | null> {
   try {
@@ -31,18 +32,7 @@ export default async function CursoDetailPage({ params }: { params: Promise<{ sl
     { numero: "250+", label: "Pilotos Formados na Lusofly" }
   ];
 
-  const testemunhos = [
-    {
-      nome: "João Pedro",
-      cargo: "First Officer - Avião Comercial",
-      texto: "O nível de exigência na Lusofly é altíssimo, mas é exatamente isso que nos prepara para o simulador das companhias aéreas. Quando cheguei à minha primeira entrevista, sentia-me anos à frente."
-    },
-    {
-      nome: "Sofia Costa",
-      cargo: "Piloto de Aviação Executiva",
-      texto: "A formação técnica é brilhante, mas o que destaco é a mentalidade de tomada de decisão (Airmanship) que nos incutem desde o primeiro voo no monomotor. Recomendo a 100%."
-    }
-  ];
+
 
   return (
     <main className="min-h-screen bg-slate-900 text-slate-300 font-sans">
@@ -99,57 +89,45 @@ export default async function CursoDetailPage({ params }: { params: Promise<{ sl
             <p className="text-slate-400 max-w-2xl mx-auto">A tua licença abre portas para diferentes estilos de vida na aviação. Escolhe o caminho que mais te apaixona.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Saída 1 - A Mais Comum */}
-            <div className="bg-slate-900 p-8 rounded-2xl border border-slate-800 hover:border-blue-500 transition-colors">
-              <div className="w-12 h-12 bg-blue-600/20 text-blue-500 rounded-xl flex items-center justify-center mb-6 text-2xl">✈️</div>
-              <h4 className="text-xl font-bold text-white mb-3">Linha Aérea (Comercial)</h4>
-              <p className="text-slate-400 text-sm leading-relaxed">A rota mais tradicional. Começas como Primeiro Oficial a transportar passageiros na Europa ou no Mundo, com uma rotina estruturada e progressão de carreira até Comandante.</p>
-            </div>
-            
-            {/* Saída 2 - Executiva */}
-            <div className="bg-slate-900 p-8 rounded-2xl border border-slate-800 hover:border-blue-500 transition-colors">
-              <div className="w-12 h-12 bg-blue-600/20 text-blue-500 rounded-xl flex items-center justify-center mb-6 text-2xl">🍸</div>
-              <h4 className="text-xl font-bold text-white mb-3">Aviação Executiva</h4>
-              <p className="text-slate-400 text-sm leading-relaxed">Para quem procura luxo e flexibilidade. Vais pilotar jatos privados para clientes VIP. Os horários são dinâmicos e os destinos variam de capitais europeias a ilhas exóticas.</p>
-            </div>
-
-            {/* Saída 3 - Carga/Trabalho Aéreo */}
-            <div className="bg-slate-900 p-8 rounded-2xl border border-slate-800 hover:border-blue-500 transition-colors">
-              <div className="w-12 h-12 bg-blue-600/20 text-blue-500 rounded-xl flex items-center justify-center mb-6 text-2xl">📦</div>
-              <h4 className="text-xl font-bold text-white mb-3">Carga & Operações Especiais</h4>
-              <p className="text-slate-400 text-sm leading-relaxed">Focado na pura pilotagem. Desde aviões cargueiros que voam durante a noite, a voos de emergência médica ou combate a incêndios. Pura técnica e adrenalina.</p>
-            </div>
-          </div>
-        </div>
+          <AnimatedCareers carreiras={curso.carreiras || []} />
+          
+        </div>  
       </section>
 
       {/* 5. TESTEMUNHOS (O lado humano) */}
       <section className="py-24 px-6 bg-slate-900 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-blue-600/10 blur-[100px] rounded-full pointer-events-none"></div>
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h3 className="text-3xl md:text-4xl font-bold text-white">Vozes do Cockpit</h3>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testemunhos.map((test, i) => (
-              <div key={i} className="bg-slate-800/80 backdrop-blur-sm p-10 rounded-2xl border border-slate-700 relative">
-                <span className="absolute top-6 left-6 text-6xl text-slate-700 opacity-50 font-serif">"</span>
-                <p className="text-lg text-slate-300 italic mb-8 relative z-10 pt-4 leading-relaxed">
-                  {test.texto}
-                </p>
-                <div className="flex items-center gap-4 border-t border-slate-700 pt-6">
-                  <div className="w-12 h-12 bg-slate-700 rounded-full flex items-center justify-center font-bold text-white">
-                    {test.nome.charAt(0)}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-blue-600/10 blur-[100px] rounded-full pointer-events-none"></div>
+            <div className="max-w-6xl mx-auto relative z-10">
+            <div className="text-center mb-16">
+                <h3 className="text-3xl md:text-4xl font-bold text-white">Vozes do Cockpit</h3>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {curso.testemunhos && curso.testemunhos.length > 0 ? (
+                curso.testemunhos.map((test) => (
+                    test.ativo && (
+                  <div key={test.id} className="bg-slate-800/80 backdrop-blur-sm p-10 rounded-2xl border border-slate-700 relative hover:border-blue-500 transition-colors">
+                    <span className="absolute top-6 left-6 text-6xl text-slate-700 opacity-50 font-serif">"</span>
+                    <p className="text-lg text-slate-300 italic mb-8 relative z-10 pt-4 leading-relaxed">
+                      {test.texto}
+                    </p>
+                    <div className="flex items-center gap-4 border-t border-slate-700 pt-6">
+                      <div className="w-12 h-12 bg-blue-900 text-blue-400 rounded-full flex items-center justify-center font-bold text-xl">
+                        {test.nome.charAt(0)}
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-white">{test.nome}</h5>
+                        <p className="text-sm text-blue-400">{test.cargo}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h5 className="font-bold text-white">{test.nome}</h5>
-                    <p className="text-sm text-blue-400">{test.cargo}</p>
-                  </div>
-                </div>
+                )
+              ))
+            ) : (
+              <div className="col-span-1 md:col-span-2 text-center py-12">
+                <p className="text-slate-500 text-lg">Os testemunhos dos nossos alunos serão atualizados brevemente.</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
